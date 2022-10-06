@@ -1,2 +1,2 @@
 #!/bin/bash
-chown --reference=guillame [betty:]  hello
+chown -R guillame betty hello
