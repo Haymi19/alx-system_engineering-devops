@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Script that Install and configure HAproxy on your lb-01 server.
+#Script that Installs and configures HAproxy on your lb-01 server.
 #Configures HAproxy so that it send traffic to web-01 and web-02.
 #Distributes requests using a roundrobin algorithm.
 #HAproxy can be managed via an init script.
@@ -7,14 +7,16 @@
 
 sudo apt-get update
 sudo apt-get -y inshall haproxy
-cat << EOF |sudo tee -a /etc/haproxy/haproxy.cfg
-listen load_balancer
-        bind :80
-	mode http
-	option httpclose
-	option forwardfor
+server_config=\
+"
+frontend  haymi-frontend
+        bind *:80
+        mode http
+        default_backend haymi-backend
+backend haymi-backend
         balance roundrobin
         server 158811-web-01 100.25.150.78:80 check
         server 158811-web-02 3.84.255.243:80 check
-EOF
+"
+echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
