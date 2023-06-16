@@ -1,4 +1,4 @@
-# starts a Gunicorn process to serve AirBnB Clone Flask App.
+# starts a Gunicorn process to serve the AirBnB Clone Flask App.
 
 [Unit]
 Description=AirBnB Clone Project with Flask web-framework
